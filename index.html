@@ -11,24 +11,43 @@
     <div
       class="bg-gray-950 min-h-screen flex justify-center flex-col items-center"
     >
-    <form id="auth-form"
-    class="border border-gray-50/50 rounded-xl gap-4 flex flex-col p-10 justify-self-center align-middle w-full max-w-md"
-    >
-    <h1 class=" text-white text-3xl mb-5">Авторизация</h1>
-        <input id="auth-form-email"
-          class="border border-gray-50/50 rounded-md text-white px-3 py-1"
-          type="text"
-          name="email"
-          placeholder="Введите почту"
-        />
-        <input id="auth-form-password"
-          class="border border-gray-50/50 rounded-md text-white px-3 py-1 disabled:opacity-45"
-          type="password"
-          name="password"
-          placeholder="Введите праоль"
+      <form
+        id="auth-form"
+        class="border border-gray-50/50 rounded-xl gap-1 flex flex-col p-10 justify-self-center align-middle w-full max-w-md"
+      >
+        <h1 class="text-white text-3xl mb-5">Авторизация</h1>
+        <div>
+          <input
+            id="auth-form-email"
+            class="border border-gray-50/50 rounded-md text-white px-3 py-1 w-full"
+            type="text"
+            name="email"
+            placeholder="Введите почту"
+          />
+          <p id="email-error" class="text-red-600 text-xs mt-1 invisible">
+            Не верно введена почта
+          </p>
+        </div>
+        <div>
+          <input
+            id="auth-form-password"
+            class="border border-gray-50/50 rounded-md text-white px-3 py-1 disabled:opacity-45 w-full"
+            type="password"
+            name="password"
+            placeholder="Введите праоль"
+            disabled
+          />
+          <p id="password-error" class="text-red-600 text-xs mt-1 invisible">
+            Не верно введен пароль
+          </p>
+        </div>
+        <input
+          id="auth-form-submit"
+          class="rounded-md bg-blue-700 text-white px-3 py-1 cursor-pointer hover:bg-blue-800 disabled:bg-blue-900 disabled:cursor-auto"
+          type="submit"
+          value="Войти"
           disabled
         />
-        <input id="auth-form-submit" class="rounded-md bg-blue-700 text-white px-3 py-1 cursor-pointer hover:bg-blue-800 disabled:bg-blue-900 disabled:cursor-auto" type="submit" value="Войти" disabled/>
       </form>
     </div>
 

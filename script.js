@@ -2,6 +2,8 @@ const authForm = document.querySelector('#auth-form');
 const authFormEmail = document.querySelector('#auth-form-email');
 const authFormPssword = document.querySelector('#auth-form-password');
 const authFormSubmit = document.querySelector('#auth-form-submit');
+const emailError = document.querySelector('#email-error')
+const passwordError=document.querySelector('#password-error')
 const validationRules = {
   emilRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   passwoedRegex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{4,}$/,
@@ -34,7 +36,9 @@ authFormEmail.addEventListener('input', (e) => {
   if (e.target.value.match(validationRules.emilRegex)) {
     formValidation.email = true;
     authFormPssword.disabled = false;
+    emailError.classList.add("invisible")
   } else {
+    emailError.classList.remove("invisible")
     formValidation.email = false;
     authFormPssword.disabled = true;
   }
@@ -44,7 +48,9 @@ authFormEmail.addEventListener('input', (e) => {
 authFormPssword.addEventListener('input', (e) => {
   if (e.target.value.match(validationRules.passwoedRegex)) {
     formValidation.password = true;
+    passwordError.classList.add("invisible")
   } else {
+    passwordError.classList.remove("invisible")
     formValidation.password = false;
   }
   checkSubmitDisabled()
