@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+  </head>
+  <body>
+    <div
+      class="bg-gray-950 min-h-screen flex justify-center flex-col items-center"
+    >
+    <form id="auth-form"
+    class="border border-gray-50/50 rounded-xl gap-4 flex flex-col p-10 justify-self-center align-middle w-full max-w-md"
+    >
+    <h1 class=" text-white text-3xl mb-5">Авторизация</h1>
+        <input id="auth-form-email"
+          class="border border-gray-50/50 rounded-md text-white px-3 py-1"
+          type="text"
+          name="email"
+          placeholder="Введите почту"
+        />
+        <input id="auth-form-password"
+          class="border border-gray-50/50 rounded-md text-white px-3 py-1 disabled:opacity-45"
+          type="password"
+          name="password"
+          placeholder="Введите праоль"
+          disabled
+        />
+        <input id="auth-form-submit" class="rounded-md bg-blue-700 text-white px-3 py-1 cursor-pointer hover:bg-blue-800" type="submit" value="Войти" />
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
