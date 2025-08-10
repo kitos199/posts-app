@@ -20,6 +20,7 @@
           <input
             id="auth-form-email"
             class="border border-gray-50/50 rounded-md text-white px-3 py-1 w-full"
+            autofocus
             type="text"
             name="email"
             placeholder="Введите почту"
@@ -31,22 +32,22 @@
         <div class="relative">
           <input
             id="auth-form-password"
-            class="border border-gray-50/50 rounded-md text-white px-3 py-1 disabled:opacity-45 w-full"
+            class="border border-gray-50/50 rounded-md text-white px-3 py-1 
+            disabled:opacity-45 w-full"
             type="password"
             name="password"
             placeholder="Введите праоль"
             disabled
           />
-          <input
-            id="show-password"
+         <button  id="toggle-password-visibility"
             type="checkbox"
-            class="absolute right-3 top-1/3 -translate-y-1/2 w-5 h-5 appearance-none cursor-pointer bg-[url('https://api.iconify.design/ic:outline-remove-red-eye.svg?color=%23999999')] bg-no-repeat"
-          />
-          <input id="hide-password" type="checkbox" class="hidden absolute
+            class="absolute right-3 top-1/3 -translate-y-1/2 w-5 h-5 appearance-none cursor-pointer  bg-no-repeat hidden"
+            style="background-image:url(https://api.iconify.design/ic:outline-remove-red-eye.svg?color=%23999999)" data-visibility="false"></button>
+          <!-- <input id="hide-password" type="checkbox" class="hidden absolute
           right-3 top-1/3 -translate-y-1/2 w-5 h-5 appearance-none
           cursor-pointer
           bg-[url('https://api.iconify.design/ion:eye-off-outline.svg?color=%23999999')]
-          bg-no-repeat">
+          bg-no-repeat"> -->
           <p id="password-error" class="text-red-600 text-xs mt-1 invisible">
             Не верно введен пароль
           </p>
