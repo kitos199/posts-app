@@ -58,12 +58,16 @@ authForm.addEventListener('submit', (e) => {
     //     }
     //   });
     // } catch (error) {}
-    const isUser = users.find((user) => {
-      return (
-        formData.email === user.email &&
-        formData.password === user.password
-      ) 
-    });
+    // const isUser = users.find((user) => {
+    //   return (
+    //     formData.email === user.email &&
+    //     formData.password === user.password
+    //   )
+    // });
+    const isUser = users.find(
+      (user) =>
+        formData.email === user.email && formData.password === user.password
+    );
     console.log(isUser);
   }
 });
