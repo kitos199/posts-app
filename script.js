@@ -1,6 +1,6 @@
 const authForm = document.querySelector('#auth-form');
 const authFormEmail = document.querySelector('#auth-form-email');
-const authFormPssword = document.querySelector('#auth-form-password');
+const authFormPassword = document.querySelector('#auth-form-password');
 const authFormSubmit = document.querySelector('#auth-form-submit');
 const emailError = document.querySelector('#email-error');
 const passwordError = document.querySelector('#password-error');
@@ -9,13 +9,22 @@ const togglePassworVisibility = document.querySelector(
 );
 const hidePassword = document.querySelector('#hide-password');
 const validationRules = {
-  emilRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-  passwoedRegex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{4,}$/,
+  emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  passwordRegex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{4,}$/,
 };
-const passwordIcons={
-  eyOpen:'url(https://api.iconify.design/ic:outline-remove-red-eye.svg?color=%23999999)',
-  eyeClose:'url(https://api.iconify.design/ion:eye-off-outline.svg?color=%23999999)'
-}
+const passwordIcons = {
+  eyOpen:
+    'url(https://api.iconify.design/ic:outline-remove-red-eye.svg?color=%23999999)',
+  eyeClose:
+    'url(https://api.iconify.design/ion:eye-off-outline.svg?color=%23999999)',
+};
+
+const users = [
+  { email: 'user1@mail.ru', password: 'Erf123' },
+  { email: 'user1@mail.ru', password: 'Erf123' },
+  { email: 'user2@mail.ru', password: 'Sda123' },
+  { email: 'user3@mail.ru', password: 'Xczzced123' },
+];
 
 const formValidation = {
   email: false,
@@ -28,39 +37,55 @@ const checkSubmitDisabled = () => {
     authFormSubmit.disabled = true;
   }
 };
+
 authForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const formObj = new FormData(e.target);
-  const formDate = Object.fromEntries(formObj);
+  const formData = Object.fromEntries(formObj);
 
   if (
-    formDate.email.match(validationRules.emilRegex) &&
-    formDate.password.match(validationRules.passwoedRegex)
+    formData.email.match(validationRules.emailRegex) &&
+    formData.password.match(validationRules.passwordRegex)
   ) {
-    console.log('yes');
+    // try {
+    //   users.forEach((user) => {
+    //     if (
+    //       formData.email === user.email &&
+    //       formData.password === user.password
+    //     ) {
+    //       console.log('user found');
+    //       throw new Error('');
+    //     }
+    //   });
+    // } catch (error) {}
+    const isUser = users.find((user) => {
+      return (
+        formData.email === user.email &&
+        formData.password === user.password
+      ) 
+    });
+    console.log(isUser);
   }
 });
 
 authFormEmail.addEventListener('input', (e) => {
-  if (e.target.value.match(validationRules.emilRegex)) {
+  if (e.target.value.match(validationRules.emailRegex)) {
     formValidation.email = true;
-    authFormPssword.disabled = false;
+    authFormPassword.disabled = false;
     emailError.classList.add('invisible');
   } else {
     emailError.classList.remove('invisible');
     formValidation.email = false;
-    authFormPssword.disabled = true;
+    authFormPassword.disabled = true;
   }
   checkSubmitDisabled();
 });
 
-authFormPssword.addEventListener('input', (e) => {
-  if(e.target.value){
-    togglePassworVisibility.classList.remove("hidden")
-  }
-  else{
-    togglePassworVisibility.classList.add("hidden")
-
+authFormPassword.addEventListener('input', (e) => {
+  if (e.target.value) {
+    togglePassworVisibility.classList.remove('hidden');
+  } else {
+    togglePassworVisibility.classList.add('hidden');
   }
   if (e.target.value.match(validationRules.passwoedRegex)) {
     formValidation.password = true;
@@ -76,15 +101,15 @@ togglePassworVisibility.addEventListener('click', (e) => {
   // console.log(e.target.getAttribute("data-visibility")); обратится к атрибуту можно
   // console.log(e.target.dataset.visibility); тоже способ что бы обратится к атрибутаи
   if (e.target.dataset.visibility === 'true') {
-    authFormPssword.type = 'password';
+    authFormPassword.type = 'password';
     e.target.style.backgroundImage = passwordIcons.eyOpen;
     e.target.dataset.visibility = 'false';
   } else {
-    authFormPssword.type = 'text';
-    e.target.style.backgroundImage =passwordIcons.eyeClose
+    authFormPassword.type = 'text';
+    e.target.style.backgroundImage = passwordIcons.eyeClose;
     e.target.dataset.visibility = 'true';
   }
-  authFormPssword.focus()
+  authFormPassword.focus();
 
   // showPassword.classList.add("hidden")
   // hidePassword.classList.remove("hidden")
