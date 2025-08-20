@@ -4,6 +4,8 @@ const authFormPassword = document.querySelector('#auth-form-password');
 const authFormSubmit = document.querySelector('#auth-form-submit');
 const emailError = document.querySelector('#email-error');
 const passwordError = document.querySelector('#password-error');
+const alertError = document.querySelector('#alert-error');
+const alertClose = document.querySelector('#alert-close');
 const togglePassworVisibility = document.querySelector(
   '#toggle-password-visibility'
 );
@@ -22,6 +24,7 @@ const passwordIcons = {
 const users = [
   { email: 'user1@mail.ru', password: 'Erf123' },
   { email: 'user1@mail.ru', password: 'Erf123' },
+  { email: 'user1@mail.ru', password: 'Erf123' },
   { email: 'user2@mail.ru', password: 'Sda123' },
   { email: 'user3@mail.ru', password: 'Xczzced123' },
 ];
@@ -30,6 +33,9 @@ const formValidation = {
   email: false,
   password: false,
 };
+
+let isAlertErrorVisibal = false;
+
 const checkSubmitDisabled = () => {
   if (formValidation.email && formValidation.password) {
     authFormSubmit.disabled = false;
@@ -68,7 +74,20 @@ authForm.addEventListener('submit', (e) => {
       (user) =>
         formData.email === user.email && formData.password === user.password
     );
-    console.log(isUser);
+
+    if (!isUser) {
+      console.log('false');
+      alertError.classList.remove('opacity-0');
+      isAlertErrorVisibal = true;
+      if (isAlertErrorVisibal) {
+        setTimeout(() => {
+          alertError.classList.add('opacity-0');
+        }, 7000);
+      }
+    }else{
+      alert("Вход разрешён")
+    }
+    //  email: 'user1@mail.ru', password: 'Erf123'
   }
 });
 
@@ -117,4 +136,10 @@ togglePassworVisibility.addEventListener('click', (e) => {
 
   // showPassword.classList.add("hidden")
   // hidePassword.classList.remove("hidden")
+});
+
+alertClose.addEventListener('click', () => {
+  if(isAlertErrorVisibal){
+    alertError.classList.add('opacity-0');
+  }
 });
