@@ -62,6 +62,7 @@ const posts = [
 ];
 
 const postWrapper = document.querySelector('#posts-wrapper');
+const favoriteList = document.querySelector('#favorite-list');
 
 const post = [];
 
@@ -69,13 +70,42 @@ const renderPosts = () => {
   let markup = '';
 
   posts.forEach((post) => {
-    markup += `<div data-id="${post.id}" class="border rounded-3xl p-3 border-white w-100 h-50 flex-col gap-4">
-              <h3 class="text-white text-xl font-bold flex gap-3 flex-col">${post.title}</h3>
-              <p class="text-white">${post.description}</button>
+    markup += `<div data-id="${post.id}"  class="post border rounded-3xl p-3 border-white w-100 h-50 flex gap-4 flex-col">
+              <h3 class="text-white text-xl font-bold"> ${post.title}<span class="text-white cursor-pointer text-5xl">*</span></h3>
+              <p class="text-white">${post.description}
+              </p>
+              <button
+              class = "rounded-md bg-blue-700 hover:bg-blue-800 text-white px-3 py-3 cursor-pointer disabled:opacity-45 disabled:bg-blue-700 disabled:cursor-auto" value="asdas">
+              Добавить в избранное
+              </button>
           </div>`;
   });
 
   postWrapper.insertAdjacentHTML('afterbegin', markup);
 };
 
-document.addEventListener('DOMContentLoaded', renderPosts);
+document.addEventListener('DOMContentLoaded', () => {
+  renderPosts();
+
+  postWrapper.addEventListener('click', (e) => {
+    if (e.target.matches('.post button')) {
+      const title = e.target.parentElement.querySelector('h3').textContent;
+      const favoritePostMarkup = `<li class="bg-gray-950 rounded-xl p-3 flex justify-between">
+                <span>${title}</span>
+                <button class="cursor-pointer">✕</button>
+            </li>`;
+      favoriteList.insertAdjacentHTML('beforeend', favoritePostMarkup);
+    }
+    if(e.target.matches(".post span")){
+      const oldtTitle=e.target.parentElement.textContent;
+      const newTitle="random"
+      e.target.parentElement.textContent=newTitle
+       for(const element of favoriteList.children){
+        if(element.querySelector('span').textContent===oldtTitle){
+          element.textContent=newTitle
+        }
+        
+       }
+    }
+  });
+});
