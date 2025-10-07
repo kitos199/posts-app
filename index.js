@@ -13,9 +13,9 @@ let authForm,
 const wrapper = document.querySelector("#wrapper");
 
 const users = [
-  {id:1, email: "user1@mail.ru", password: "qwe123QWE" },
-  {id:2, email: "user2@mail.ru", password: "asd123ASD" },
-  {id:3, email: "user3@mail.ru", password: "zxc123ZXC" },
+  { id: 1, email: "user1@mail.ru", password: "qwe123QWE" },
+  { id: 2, email: "user2@mail.ru", password: "asd123ASD" },
+  { id: 3, email: "user3@mail.ru", password: "zxc123ZXC" },
 ];
 
 const validationRules = {
@@ -33,9 +33,10 @@ const formValidation = {
 let isAlertErrorVisible = false;
 
 const passwordIcons = {
-  eyeOpen:"url(https://api.iconify.design/ic:outline-remove-red-eye.svg?color=#999999)&quot",
+  eyeOpen:
+    "url(https://api.iconify.design/ic:outline-remove-red-eye.svg?color=%23999999)",
   eyeClose:
-    "url(https://api.iconify.design/ion:eye-off-outline.svg?color=#999999)&quot;,"
+    "url(https://api.iconify.design/ion:eye-off-outline.svg?color=%23999999)",
 };
 
 const authFormMarkup = `
@@ -53,11 +54,11 @@ const authFormMarkup = `
 
         <button id="toggle-password-visibility" class="hidden absolute right-3 top-1/3 -translate-y-1/3 w-5 h-5 appearance-none cursor-pointer 
               bg-no-repeat"
-          style="background-image: url(https://api.iconify.design/ic:outline-remove-red-eye.svg?color=#999999)&quot;
+          style="background-image: url(https://api.iconify.design/ic:outline-remove-red-eye.svg?color=%23999999)"
           data-visibility="false"></button>
 
         <!-- <input id="hide-password" type="checkbox" class="hidden absolute right-3 top-1/3 -translate-y-1/3 w-5 h-5 appearance-none cursor-pointer 
-             bg-[url('https://api.iconify.design/ion:eye-off-outline.svg?color=#999999')] bg-no-repeat"> -->
+             bg-[url('https://api.iconify.design/ion:eye-off-outline.svg?color=%23999999')] bg-no-repeat"> -->
 
         <p id="password-error" class="text-red-600 text-xs mt-1 invisible">Неверный пароль</p>
       </div>
@@ -84,14 +85,11 @@ const regFormMarkup = `
 
         <button id="toggle-password-visibility" class="hidden absolute right-3 top-1/3 -translate-y-1/3 w-5 h-5 appearance-none cursor-pointer 
               bg-no-repeat"
-          style="background-image: url(https://api.iconify.design/ic:outline-remove-red-eye.svg?color=#999999)&quot;
+          style="background-image: url(https://api.iconify.design/ic:outline-remove-red-eye.svg?color=%23999999)"
           data-visibility="false"></button>
 
-        <!-- <input
-
-
-id="hide-password" type="checkbox" class="hidden absolute right-3 top-1/3 -translate-y-1/3 w-5 h-5 appearance-none cursor-pointer 
-             bg-[url('https://api.iconify.design/ion:eye-off-outline.svg?color=#999999')] bg-no-repeat"> -->
+        <!-- <input id="hide-password" type="checkbox" class="hidden absolute right-3 top-1/3 -translate-y-1/3 w-5 h-5 appearance-none cursor-pointer 
+             bg-[url('https://api.iconify.design/ion:eye-off-outline.svg?color=%23999999')] bg-no-repeat"> -->
 
         <p id="password-error" class="text-red-600 text-xs mt-1 invisible">Неверный пароль</p>
       </div>
@@ -165,12 +163,8 @@ const init = (formType) => {
             }, 7000);
           }
         } else {
-          // Устанавливаем куки 
-          
-          document.cookie=`authUser=${isUser.id}; path=/; max-age=3600;`
-
-          alert("Вход разрешен");
-          location.href="posts.html"
+          document.cookie = `authUser=${isUser.id}; path=/; max-age=3600`;
+          location.href = "posts.html";
         }
       } else if (formType === formTypes[1]) {
         users.push(formData);
@@ -200,9 +194,7 @@ const init = (formType) => {
   authFormPassword.addEventListener("input", (e) => {
     if (e.target.value) {
       togglePasswordVisibility.classList.remove("hidden");
-
-
-} else {
+    } else {
       togglePasswordVisibility.classList.add("hidden");
     }
 
@@ -260,10 +252,12 @@ document.addEventListener("DOMContentLoaded", () => {
   init(formTypes[0]);
 });
 
-// document.addEventListener("DOMContentLoaded", ()=>{
-//   render(authFormMarkup);
-//   init(formTypes[0]);
+// const cookieArr = document.cookie.split(";");
 
-// })
-// document.cookie()
+// cookieArr.forEach((el) => {
+//   "_ym_uid=1719807991381788226";
+//   const cookieName = el.split("=")[0];
+//   document.cookie = cookieName + "=; max-age=0";
+// });
+
 // console.log(document.cookie);

@@ -1,12 +1,12 @@
-console.log(location.pathname); 
+const url = location.pathname.replace(/\//g,""); 
 const coockieArray = document.cookie.split(';');
 
-coockieArray.forEach((ele) => {
-  const [name, value] = ele.split('=');
+coockieArray.forEach((element) => {
+  const [name, value] = element.split('=');
   if (name !== 'authUser' || isNaN(value)) {
     if(location.pathname.replace(/\//g, '')==="posts.html"){
         location.href = 'index.html';
-    }else if(location.pathname.replace(/\//g, '')==="index.html"){
+    }else if(name === "authUser"&& !isNaN(value)&&url==="index.html"){
         location.href="posts.html"
     }
   }
