@@ -100,7 +100,7 @@ let favourites = JSON.parse(localStorage.getItem('favourites'))?.find(
 // const favourites = [];
 
 const renderFavouritesPosts = () => {
-  const postsUi = postsWrapper.querySelectorAll('.post');
+  const postsUi = postsWrapper.querySelectorAll(".post")
   let markup = '';
   favourites.forEach((postId) => {
     const post = posts.find((el) => el.id === postId);
@@ -108,7 +108,12 @@ const renderFavouritesPosts = () => {
     <span>${post.title}</span>
     <button class="cursor-pointer delete-favourite">✕</button>
     </li>`;
-    console.log(favourites,post);
+    
+    if(posts[post.id]!==post.id){
+      
+    }else{
+      console.log("error");
+    }
     
     for (const el of postsUi) {
       if (Number(el.dataset.id) === postId) {
