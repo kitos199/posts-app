@@ -80,7 +80,7 @@ const getUserId = () => {
 };
 
 const userId = getUserId();
-
+console.log(userId);
 const posts = JSON.parse(localStorage.getItem('posts'));
 let favourites = JSON.parse(localStorage.getItem('favourites'))?.find(
   (obj) => Number(obj.id) === userId
@@ -164,7 +164,14 @@ document.addEventListener('DOMContentLoaded', () => {
           favouritesLS.forEach((obj) => {
             if (obj.id === userId) {
               if (!obj.posts.includes(id)) {
-                obj.posts.push(id);
+                obj.posts.push(id); const favouritePostMarkup = `<li data-id="${post.id}" class="rounded-xl p-3 px-5 bg-gray-950 flex justify-between">
+               <span>${post.title}</span>
+                <button class="cursor-pointer delete-favourite">✕</button>
+            </li>`;
+        favouriteList.insertAdjacentHTML('beforeend', favouritePostMarkup);
+       
+        e.target.disabled = true;
+        e.target.textContent = 'Уже в избранном'
               }
             }
           });
@@ -174,20 +181,11 @@ document.addEventListener('DOMContentLoaded', () => {
             id: userId,
             posts: [post.id],
           };
+          console.log(object)
           localStorage.setItem('favourites', JSON.stringify([userObj]));
         }
 
-        const favouritePostMarkup = `<li data-id="${post.id}" class="rounded-xl p-3 px-5 bg-gray-950 flex justify-between">
-               <span>${post.title}</span>
-                <button class="cursor-pointer delete-favourite">✕</button>
-            </li>`;
-        favouriteList.insertAdjacentHTML('beforeend', favouritePostMarkup);
-        // console.log(favouriteList);
-        // if (favouriteList) {
-        //   console.log(favouriteList>0);
-        // }
-        e.target.disabled = true;
-        e.target.textContent = 'Уже в избранном';
+       ;
       } else {
         alert('Попробуйте позже');
       }
