@@ -80,7 +80,6 @@ const getUserId = () => {
 };
 
 const userId = getUserId();
-console.log(userId);
 const posts = JSON.parse(localStorage.getItem('posts'));
 let favourites = JSON.parse(localStorage.getItem('favourites'))?.find(
   (obj) => Number(obj.id) === userId
@@ -139,6 +138,20 @@ const renderPosts = () => {
     </div>`;
   });
   postsWrapper.insertAdjacentHTML('afterbegin', markup);
+  initializeFavourites();
+};
+
+const initializeFavourites = () => {
+  let favourites = JSON.parse(localStorage.getItem('favourites')) || [];
+  const userExists = favourites.some((user) => user.id === userId);
+  if (!userExists) {
+    const userObj = {
+      id: userId,
+      posts: [],
+    };
+    favourites.push(userObj);
+    localStorage.setItem('favourites', JSON.stringify(favourites));
+  }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -164,14 +177,18 @@ document.addEventListener('DOMContentLoaded', () => {
           favouritesLS.forEach((obj) => {
             if (obj.id === userId) {
               if (!obj.posts.includes(id)) {
-                obj.posts.push(id); const favouritePostMarkup = `<li data-id="${post.id}" class="rounded-xl p-3 px-5 bg-gray-950 flex justify-between">
+                obj.posts.push(id);
+                const favouritePostMarkup = `<li data-id="${post.id}" class="rounded-xl p-3 px-5 bg-gray-950 flex justify-between">
                <span>${post.title}</span>
                 <button class="cursor-pointer delete-favourite">✕</button>
             </li>`;
-        favouriteList.insertAdjacentHTML('beforeend', favouritePostMarkup);
-       
-        e.target.disabled = true;
-        e.target.textContent = 'Уже в избранном'
+                favouriteList.insertAdjacentHTML(
+                  'beforeend',
+                  favouritePostMarkup
+                );
+
+                e.target.disabled = true;
+                e.target.textContent = 'Уже в избранном';
               }
             }
           });
@@ -181,11 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
             id: userId,
             posts: [post.id],
           };
-          console.log(object)
           localStorage.setItem('favourites', JSON.stringify([userObj]));
         }
-
-       ;
       } else {
         alert('Попробуйте позже');
       }
